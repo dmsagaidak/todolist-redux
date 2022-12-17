@@ -1,23 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi";
 import {RootState} from "../../app/store";
-
-interface TaskItem {
-  id: string,
-  status: boolean,
-  title: string,
-}
-
-interface Tasks {
-  tasks: TaskItem[],
-  loading: boolean,
-  error: boolean,
-  updateLoading: boolean,
-}
-
-interface ApiTask {
-  [id: string]: TaskItem
-}
+import {TaskItem, Tasks, ApiTask} from "../../types";
 
 const initialState: Tasks = {
   tasks: [],
