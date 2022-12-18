@@ -23,6 +23,15 @@ export const addTask = createAsyncThunk(
   async (task:TaskItem) => {
     await axiosApi.post('/tasks.json', task)
   }
+);
+
+export const removeTask = createAsyncThunk(
+  'todoList/remove',
+  async (id: string) => {
+    if(window.confirm('Do you really want to delete this item?')) {
+      await axiosApi.delete('/tasks/' + id + '.json')
+    }
+  }
 )
 
 export const todoListSlice = createSlice({
@@ -48,6 +57,14 @@ export const todoListSlice = createSlice({
       state.loading = false;
       state.error = true;
     });
+    builder.addCase(removeTask.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(removeTask.fulfilled, (state) => {
+      state.loading = false;
+      state.error = false;
+    })
   }
 })
 

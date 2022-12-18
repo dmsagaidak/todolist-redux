@@ -14,7 +14,7 @@ const AddForm = () => {
   })
 
   const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTask(prev => ({...prev, title: e.target.value, status: false}))
+    setTask(prev => ({...prev, title: e.target.value, status: false, id: (Math.random()*10000).toString()}))
   }
 
   const onTaskAdd = async (e: React.FormEvent) => {

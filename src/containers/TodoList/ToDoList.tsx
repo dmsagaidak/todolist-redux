@@ -24,6 +24,7 @@ const ToDoList = () => {
       {todoListLoading || todoListUpdateLoading ? <ClipLoader/> : todoListItems.map((item) => (
         <ListItem
         key={item.id}
+        id={item.id}
         title={item.title}
         isDone={item.status}
         />

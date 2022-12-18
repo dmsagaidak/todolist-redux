@@ -1,22 +1,28 @@
 import React, {useState} from 'react';
 import './ListItem.css';
 import {TaskItem} from "../../types";
-import axiosApi from "../../axiosApi";
 import {AppDispatch} from "../../app/store";
 import {useDispatch} from "react-redux";
-import {fetchTasks} from "./todoListSlice";
+import {fetchTasks, removeTask} from "./todoListSlice";
 
 interface Props {
+  id: string;
   title: string;
   isDone: boolean;
 }
 
-const ListItem: React.FC<Props> = ({title, isDone}) => {
+const ListItem: React.FC<Props> = ({title, isDone,id}) => {
+  const dispatch: AppDispatch = useDispatch();
   const [task, setTask] = useState<TaskItem>({
     id: '',
     title: '',
     status: false,
-  })
+  });
+
+  const onDelete = async () => {
+    await dispatch(removeTask(id));
+    await dispatch(fetchTasks());
+  }
 
 
   return (
@@ -28,7 +34,8 @@ const ListItem: React.FC<Props> = ({title, isDone}) => {
         onChange={async (e) => {
           setTask(prev =>({...prev, status: e.target.checked}));
         }}
-      /> <span>{title}</span>
+      /> <p className="task_item">{title}</p>
+      <button onClick={() => onDelete()} className="remove_btn">Remove</button>
     </div>
   );
 };

@@ -5,3 +5,16 @@
     margin-bottom: 4px;
     padding: 3px;
 }
+
+.task_item{
+    display: inline-block;
+    width: 500px;
+    margin: 0;
+}
+
+.remove_btn{
+    background: #e51b1b;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+}
