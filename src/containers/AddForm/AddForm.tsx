@@ -17,10 +17,10 @@ const AddForm = () => {
     setTask(prev => ({...prev, title: e.target.value, status: false}))
   }
 
-  const onTaskAdd = (e: React.FormEvent) => {
+  const onTaskAdd = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addTask(task));
-    dispatch(fetchTasks());
+    await dispatch(addTask(task));
+    await dispatch(fetchTasks());
   }
 
   return (
