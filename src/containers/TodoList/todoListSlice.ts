@@ -1,6 +1,5 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi";
-import {RootState} from "../../app/store";
 import {TaskItem, Tasks, ApiTask} from "../../types";
 
 const initialState: Tasks = {

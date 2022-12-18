@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {AppDispatch, RootState} from "../../app/store";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchTasks, addTask} from "./todoListSlice";
+import {fetchTasks} from "./todoListSlice";
 import ListItem from "./ListItem";
 import {ClipLoader} from "react-spinners";
 import AddForm from "../AddForm/AddForm";
