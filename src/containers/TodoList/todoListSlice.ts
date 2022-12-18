@@ -18,13 +18,12 @@ export const fetchTasks = createAsyncThunk(
   }
 )
 
-// export const addTask = createAsyncThunk<void, undefined, {state: RootState}>(
-//   'todoList/add',
-//   async (arg, thunkAPI) => {
-//     const todoList = thunkAPI.getState().todolist.title;
-//     await axiosApi.put('/tasks.json')
-//   }
-// )
+export const addTask = createAsyncThunk(
+  'todoList/add',
+  async (task:TaskItem) => {
+    await axiosApi.post('/tasks.json', task)
+  }
+)
 
 export const todoListSlice = createSlice({
   name: 'todoList',
@@ -34,7 +33,7 @@ export const todoListSlice = createSlice({
     builder.addCase(fetchTasks.pending, (state) => {
       state.loading = true;
       state.error = false;
-    })
+    });
     builder.addCase(fetchTasks.fulfilled, (state, action) => {
       state.loading = false;
       state.tasks = Object.keys(action.payload).map((id: string) => {
@@ -44,11 +43,11 @@ export const todoListSlice = createSlice({
           id
         }
       });
-    })
+    });
     builder.addCase(fetchTasks.rejected, (state) => {
       state.loading = false;
       state.error = true;
-    })
+    });
   }
 })
 

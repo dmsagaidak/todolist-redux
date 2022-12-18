@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import './ListItem.css';
 import {TaskItem} from "../../types";
+import axiosApi from "../../axiosApi";
+import {AppDispatch} from "../../app/store";
+import {useDispatch} from "react-redux";
+import {fetchTasks} from "./todoListSlice";
 
 interface Props {
   title: string;
@@ -14,14 +18,15 @@ const ListItem: React.FC<Props> = ({title, isDone}) => {
     status: false,
   })
 
+
   return (
     <div className="card">
       <input
         id="isDone"
         type="checkbox"
         checked={isDone}
-        onChange={(e) => {
-          setTask(prev =>({...prev, status: e.target.checked}))
+        onChange={async (e) => {
+          setTask(prev =>({...prev, status: e.target.checked}));
         }}
       /> <span>{title}</span>
     </div>

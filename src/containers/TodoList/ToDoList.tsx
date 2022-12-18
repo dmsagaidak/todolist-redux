@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import {AppDispatch, RootState} from "../../app/store";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchTasks} from "./todoListSlice";
+import {fetchTasks, addTask} from "./todoListSlice";
 import ListItem from "./ListItem";
 import {ClipLoader} from "react-spinners";
+import AddForm from "../AddForm/AddForm";
 
 const ToDoList = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -13,12 +14,14 @@ const ToDoList = () => {
 
   useEffect(() => {
     dispatch(fetchTasks());
-  }, [dispatch])
+  }, [dispatch]);
+
 
   return (
     <div>
-      <h3>My tasks</h3>
-      {todoListLoading ? <ClipLoader/> : todoListItems.map((item) => (
+      <AddForm/>
+      <h4>My tasks</h4>
+      {todoListLoading || todoListUpdateLoading ? <ClipLoader/> : todoListItems.map((item) => (
         <ListItem
         key={item.id}
         title={item.title}
