@@ -4,6 +4,7 @@ import {TaskItem} from "../../types";
 import {AppDispatch} from "../../app/store";
 import {useDispatch} from "react-redux";
 import {fetchTasks, removeTask} from "./todoListSlice";
+import axiosApi from "../../axiosApi";
 
 interface Props {
   id: string;
@@ -24,6 +25,11 @@ const ListItem: React.FC<Props> = ({title, isDone,id}) => {
     await dispatch(fetchTasks());
   }
 
+  const changeStatus = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTask(prev =>({...prev, id: id, title: title, status: e.target.checked}))
+    await dispatch(changeStatus(task))
+  }
+
 
   return (
     <div className="card">
@@ -31,9 +37,7 @@ const ListItem: React.FC<Props> = ({title, isDone,id}) => {
         id="isDone"
         type="checkbox"
         checked={isDone}
-        onChange={async (e) => {
-          setTask(prev =>({...prev, status: e.target.checked}));
-        }}
+        onChange={changeStatus}
       /> <p className="task_item">{title}</p>
       <button onClick={() => onDelete()} className="remove_btn">Remove</button>
     </div>
