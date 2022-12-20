@@ -13,14 +13,14 @@ export const fetchTasks = createAsyncThunk(
   'todoList/fetch',
   async () => {
     const response = await axiosApi.get<ApiTask>('/tasks.json');
-    return response.data;
+    return response.data ?? [{id: '', title: 'No tasks added, please fill in the form to add some tasks', status: false}];
   }
 )
 
 export const addTask = createAsyncThunk(
   'todoList/add',
   async (task:TaskItem) => {
-    await axiosApi.post('/tasks.json', task)
+    await axiosApi.post('/tasks.json', task);
   }
 );
 
@@ -28,7 +28,7 @@ export const removeTask = createAsyncThunk(
   'todoList/remove',
   async (id: string) => {
     if(window.confirm('Do you really want to delete this item?')) {
-      await axiosApi.delete('/tasks/' + id + '.json')
+      await axiosApi.delete('/tasks/' + id + '.json');
     }
   }
 );
