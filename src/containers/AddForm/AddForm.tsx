@@ -21,6 +21,7 @@ const AddForm = () => {
     e.preventDefault();
     await dispatch(addTask(task));
     await dispatch(fetchTasks());
+    setTask(prev =>({...prev, title: ''}));
   }
 
   return (
